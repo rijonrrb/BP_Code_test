@@ -162,6 +162,7 @@ class BloggerController extends Controller
         //   $time =  date('d F Y, h:i:s A');
 
           $blog = new Blog();
+          $blog->bloggerId = session()->get('id');
           $blog->title = $request->title;
           $blog->slug = $request->slug;
           $blog->description = $request->description;
@@ -173,6 +174,11 @@ class BloggerController extends Controller
           else{
               return redirect()->back()->with('failed', 'Blog uploading Failed');
           }
+        }
+
+        public function bloglist(){
+            $bloglist = Blog::where('bloggerId',session()->get('id'))->get();
+            return view('Blogger.viewBlogs')->with('bloglist', $bloglist);
         }
 
 

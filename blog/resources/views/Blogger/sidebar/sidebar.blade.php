@@ -10,8 +10,8 @@
 					</div>
 					<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
 						<div class="card-body">
-							<ul class="list-group">
-								<li class="list-group-item"><a href="#"><i class="fa fa-pencil"></i> View Profile</a></li>
+							<ul class="list-group"> 
+								<li class="list-group-item"><a href="{{route('bloggerProf')}}"><i class="fa fa-pencil"></i> View Profile</a></li>
 							</ul>
 						</div>
 					</div>
@@ -27,10 +27,10 @@
 						</h2>
 					</div>
 					<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-						<div class="card-body">
+						<div class="card-body">  
 							<ul class="list-group">										
 								<li class="list-group-item"><a href="{{route('blogAdd')}}"><i class="fa fa-plus"></i> Add Blogs</a></li>
-								<li class="list-group-item"><a href="#"><i class="fa fa-pencil-square-o"></i> View Blogs </a></li>
+								<li class="list-group-item"><a href="{{route('bloglist')}}"><i class="fa fa-pencil-square-o"></i> View Blogs </a></li>
                                 <li class="list-group-item"><a href="#"><i class="fa fa-eye"></i> Update Blogs </a></li>
                                 <li class="list-group-item"><a href="#"><i class="fa fa-trash"></i> Delete Blogs </a></li>		
 							</ul>
