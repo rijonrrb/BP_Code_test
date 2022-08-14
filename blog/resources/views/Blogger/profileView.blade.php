@@ -4,8 +4,9 @@
 <head>
 <style>
 body {
-    background: rgb(99, 39, 120)
-}
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  background-color: #efefef;
+  font-weight: 300; }
 
 .form-control:focus {
     box-shadow: none;
@@ -81,7 +82,7 @@ body {
 
     <div class="row">
 
-<div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5 shadow p-2 mb-5 bg-white rounded" width="250px" src="img/{{Session::get('image')}}">
+<div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="mt-3 shadow p-2 mb-5 bg-white" width="180px" src="img/{{Session::get('image')}}">
 
         <div class="col-md-12 border-right">
             <div class="p-3 py-5">
@@ -102,9 +103,7 @@ body {
 		<div class="input-group-prepend">
 		    <span class="input-group-text"> <i class="fa fa-venus-mars"></i> </span>
 		 </div>
-            <select class="custom-select" name="gender" value="{{Session::get('gender')}}" disabled> 
-		    <option selected="{{Session::get('gender')}}">{{Session::get('gender')}}</option>
-		</select>
+         <input type="text" name="fname" class="form-control" value="{{Session::get('gender')}}" disabled>
     </div> 
 
 

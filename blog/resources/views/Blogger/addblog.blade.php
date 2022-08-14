@@ -46,6 +46,8 @@ img {margin-bottom: -7px}
         <input type="text" name="title" class="form-control" placeholder="Enter Title"><br>
         <input name="slug" class="form-control" placeholder="Enter slugs" type="text"><br>
         <textarea name="description" class="form-control" placeholder="Enter description"></textarea><br>
+        <input class="form-control" type="file" id="formFile" name="image" id="image" accept="image/png, image/gif, image/jpeg, image/jpg"><br>
+
         <div class="form-group">
         <input type="submit" class="btn btn-primary btn-block" value="Upload Post">
        </div>                                                                    

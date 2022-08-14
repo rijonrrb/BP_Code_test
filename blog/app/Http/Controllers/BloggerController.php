@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateBloggerRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Pagination\Paginator;
 use App\Mail\bloggerRegConfirmation;
 use DateTime;
 
@@ -89,7 +90,7 @@ class BloggerController extends Controller
         $validate = $request->validate([
             'otp'=>'required',
         ]);
-    $status = "Approve";
+    $status = "Approved";
     $user = Blogger::where('username',session()->get('username'))->first();
 
     if($user->otp === $request->otp){
@@ -109,7 +110,7 @@ class BloggerController extends Controller
     $loginCheck = Blogger::where('username',$request->username)->where('password',md5($request->password))->first();
 
     if($loginCheck){
-        if($loginCheck->status == "Approve")
+        if($loginCheck->status == "Approved")
         {
             $request->session()->put('id',$loginCheck->id);
             $request->session()->put('name',$loginCheck->name);
@@ -150,6 +151,7 @@ class BloggerController extends Controller
               "title"=>'required',
               "slug"=>"required",
               'description'=>'required',
+              'image'=>'required'
               
           ],
           ['title.required'=>"The Title field is required.",
@@ -160,15 +162,17 @@ class BloggerController extends Controller
         
         //   date_default_timezone_set('Asia/Dhaka');
         //   $time =  date('d F Y, h:i:s A');
-
+          $image = $request->file('image')->getClientOriginalName();
           $blog = new Blog();
-          $blog->bloggerId = session()->get('id');
+          $blog->user_id = session()->get('id');
           $blog->title = $request->title;
           $blog->slug = $request->slug;
           $blog->description = $request->description;
+          $blog->image = $image;
         //   $blog->created_at =  $time;
           $result = $blog->save();
           if($result){
+            $folder = $request->file('image')->move(public_path('blog').'/',$image);
             return redirect()->back()->with('success', 'Blog successfully uploaded');
           }
           else{
@@ -177,9 +181,62 @@ class BloggerController extends Controller
         }
 
         public function bloglist(){
-            $bloglist = Blog::where('bloggerId',session()->get('id'))->get();
+            $bloglist = Blog::where('user_id',session()->get('id'))->paginate(3);
             return view('Blogger.viewBlogs')->with('bloglist', $bloglist);
         }
+
+        public function updatelist(){
+            $bloglist = Blog::where('user_id',session()->get('id'))->paginate(3);
+            return view('Blogger.UpdateBlogs')->with('bloglist', $bloglist);
+        }
+        public function blogUp(Request $request){
+
+            $blog = Blog::where('id',$request->id)->first();
+            return view('Blogger.BlogInfo')->with('blog', $blog);
+        }
+
+        public function blogInfoUp(Request $request){
+
+            $validate = $request->validate([
+                  "title"=>'required',
+                  "slug"=>"required",
+                  'description'=>'required',
+                  'image'=>'required'
+                  
+              ],
+              ['title.required'=>"The Title field is required.",
+              'slug.required'=>"The Slug field is required.",
+              'description.required'=>"The Description field is required."
+              ]
+          );
+            
+              $image = $request->file('image')->getClientOriginalName();
+              $blog = Blog::where('id',$request->bid)->first();
+              $blog->title = $request->title;
+              $blog->slug = $request->slug;
+              $blog->description = $request->description;
+              $blog->image = $image;
+              $result = $blog->save();
+
+              if($result){
+                $folder = $request->file('image')->move(public_path('blog').'/',$image);
+                return redirect()->back()->with('success', 'Blog successfully uploaded');
+              }
+              else{
+                  return redirect()->back()->with('failed', 'Blog uploading Failed');
+              }
+            }
+            public function blogDellist(){
+                $bloglist = Blog::where('user_id',session()->get('id'))->paginate(3);
+                return view('Blogger.DeleteBlog')->with('bloglist', $bloglist);
+            }
+            public function blogDel(Request $request){
+                $blog = Blog::where('id',$request->id)->first();
+                $blog->delete();
+        
+                return redirect()->route('blogDelete');
+            }
+
 
 
 }

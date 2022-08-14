@@ -31,12 +31,16 @@ h3{
 	height: 700px;
 	width: 460px;	
 	box-shadow: 0px 0px 24px #5C5696;
+	border-radius: 40px;
+	
 }
 
 .screen__content {
 	z-index: 1;
 	position: relative;	
 	height: 100%;
+	
+	
 }
 
 .hl {
@@ -74,6 +78,7 @@ h3{
 	right: 0;
 	bottom: 0;
 	z-index: 0;
+	
 	-webkit-clip-path: inset(0 0 0 0);
 	clip-path: inset(0 0 0 0);	
 }
@@ -89,7 +94,9 @@ h3{
 	background: #FFF;	
 	top: -50px;
 	right: 120px;	
-	border-radius: 0 72px 0 0;
+	border-radius: 50px 72px 40px 40px;
+	margin-top: 40px;
+	
 }
 
 .screen__background__shape2 {
@@ -98,7 +105,8 @@ h3{
 	background: #B25068;	
 	top: -172px;
 	right: 0;	
-	border-radius: 32px;
+	margin-right: 13px; 
+
 }
 
 .screen__background__shape3 {
@@ -108,6 +116,7 @@ h3{
 	top: -24px;
 	right: 0;	
 	border-radius: 32px;
+	margin-top: 15px;
 }
 
 .screen__background__shape4 {
@@ -117,6 +126,7 @@ h3{
 	top: 420px;
 	right: 50px;	
 	border-radius: 60px;
+	
 }
 
 .login {

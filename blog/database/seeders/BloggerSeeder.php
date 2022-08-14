@@ -23,8 +23,8 @@ class BloggerSeeder extends Seeder
             'status' => 'Approved',
             'username' => 'abc',
             'password' => md5('abc'),
-            'otp' => Null,
             'image' => 'index.png',
+            'otp' => '3256',
             'created_at' => '2022-05-23 02:24:08',
             'updated_at' => '2022-05-23 02:24:08'
 
